@@ -7,7 +7,7 @@ Git is a version control system used to track and manage changes in source code.
 Push a file names flag.txt to the repository such that the commit author is identified as `root:root@picoctf` if the pushed commit matches these conditions, the server will update flag.txt with the challenge flag.
 
 ## Solution
-1. Clone the repository:
+### Clone the repository
 ```bash
 git clone ssh://git@foggy-cliff.picoctf.net:58642/git/challenge.git
 # Enter the provided password in the challenge description
@@ -20,12 +20,13 @@ README.md:
 ### If you want the flag, make sure to push the flag!
 # Only flag.txt pushed by ```root:root@picoctf``` will be updated with the flag.
 ```
-From the README file we can infer the following requirements:
+From the README file we can infer the following requirements:  
+
 * The file name must be `flag.txt`
 * The Author must be: `root`
 * The Email must be: `root@picoctf`
 
-2. Configure the Git identity
+### Configure the Git identity
 Git Allows users to define author information for commits.  
 Set the Git username and email:
 ```bash
@@ -34,7 +35,7 @@ git config --global user.email "root@picoctf"
 ```
 After applying the changes, future commit will appear as if they were commited by the `root` user.
 
-3. Create and commit the file
+### Create and commit the file
 Create the required flag and commit it to the repository:
 ```bash
 echo "flag" > flag.txt
@@ -59,8 +60,16 @@ git push
 #    2dbf195..2fa7801  master -> master
 ```
 
-### Why this works:
+### Why this works ?
 * Git allows users to configure any metadata in the global configuration.
 * The server trusted commit metadata without verifying the author's identity.
-* No cryptographic verification mechanism such as GPG was used to authenticate commits.
+* No cryptographic verification mechanism such as **GPG was used to authenticate commits.
 * The challenge only checked the commit author fields.
+
+### GPG used to sign commits in Git to provide cryptographic proof that:
+1. The commit was signed with your private key.
+2. The public key matches your identity.
+3. The signature helps prevents someone from impersonating you as the commit author. Others commits will NOT verify unless signed with your key.
+
+Authentication to remote server done with: SSH Keys / HTTPS + Token  
+Commit signing donw with GPG / SSH signing / S/MIME
