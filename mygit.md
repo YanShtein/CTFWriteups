@@ -63,7 +63,7 @@ git push
 ### Why this works ?
 * Git allows users to configure any metadata in the global configuration.
 * The server trusted commit metadata without verifying the author's identity.
-* No cryptographic verification mechanism such as **GPG was used to authenticate commits.
+* No cryptographic verification mechanism such as **GPG** was used to authenticate commits.
 * The challenge only checked the commit author fields.
 
 ### GPG used to sign commits in Git to provide cryptographic proof that:
@@ -72,4 +72,4 @@ git push
 3. The signature helps prevents someone from impersonating you as the commit author. Others commits will NOT verify unless signed with your key.
 
 Authentication to remote server done with: SSH Keys / HTTPS + Token  
-Commit signing donw with GPG / SSH signing / S/MIME
+Commit signing done with GPG / SSH signing / S/MIME
